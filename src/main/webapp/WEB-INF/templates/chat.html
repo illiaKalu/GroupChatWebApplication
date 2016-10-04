@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html >
+<head>
+	<script src="../../../resources/js/jquery-1.7.2.min.js"></script>
+	<script src="../../../resources/js/chat_js.js"> </script>
+	<script src="../../../resources/js/angular.min.js"></script>
+
+
+	<link rel='shortcut icon' type='image/x-icon' href='../../resources/favicon.ico'/>
+	<title>Chat</title>
+</head>
+
+<body ng-app="app" ng-controller="chatController">
+
+<div>
+	<button ng-click="loginLogout()">{{loginButtonText}}</button>
+</div>
+
+
+<div ng-show="loggedIn" >
+
+	Entered As: {{userName}} <br></br>
+	<textarea ng-model="chatContent" rows="15" cols="60" readonly="readonly"></textarea>
+
+	<br></br>
+
+	<form id="postMessageForm" >
+		<p>
+			<input ng-model="message" id="message" name="message" type="text"  />
+			<button ng-click="sendMessage()" id="post" type="submit" >Post</button>
+		</p>
+	</form>
+
+</div>
+
+<form id="joinChatForm" ng-show="!loggedIn">
+
+	<label for="user">User: </label>
+	<input ng-model="name" ng-required="true" id="user" name="user" type="text"/>
+	<input ng-model="index" name="messageIndex" type="hidden"/>
+
+</form>
+
+</body>
+
+
+
+
+</html>
