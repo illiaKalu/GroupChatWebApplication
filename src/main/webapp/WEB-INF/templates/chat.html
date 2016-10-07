@@ -5,7 +5,6 @@
 	<script src="../../../resources/js/chat_js.js"> </script>
 	<script src="../../../resources/js/angular.min.js"></script>
 
-
 	<link rel='shortcut icon' type='image/x-icon' href='../../resources/favicon.ico'/>
 	<title>Chat</title>
 </head>
@@ -23,6 +22,12 @@
 	<textarea ng-model="chatContent" rows="15" cols="60" readonly="readonly"></textarea>
 
 	<br></br>
+	<br></br>
+
+	<textarea ng-model="messageStory" rows="15" cols="60" readonly="readonly"></textarea>
+	<button ng-click="loadStory()">Load Story</button>
+
+	<br></br>
 
 	<form id="postMessageForm" >
 		<p>
@@ -37,7 +42,6 @@
 
 	<label for="user">User: </label>
 	<input ng-model="name" ng-required="true" id="user" name="user" type="text"/>
-	<input ng-model="index" name="messageIndex" type="hidden"/>
 
 </form>
 

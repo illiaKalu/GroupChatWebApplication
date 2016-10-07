@@ -1,30 +1,29 @@
-
 package dev.illiaKa.groupChatWebApp.config;
 
-import javax.servlet.ServletRegistration.Dynamic;
 
-import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRegistration;
 
-public class DispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
+import org.springframework.web.WebApplicationInitializer;
+import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
+import org.springframework.web.servlet.DispatcherServlet;
+
+public class DispatcherServletInitializer implements WebApplicationInitializer {
 	@Override
-	protected Class<?>[] getRootConfigClasses() {
-		return null;
-	}
+	public void onStartup(ServletContext servletContext) throws ServletException {
 
-	@Override
-	protected Class<?>[] getServletConfigClasses() {
-		return new Class<?>[] { WebMvcSpringConfig.class };
-	}
 
-	@Override
-	protected String[] getServletMappings() {
-		return new String[] { "/" };
-	}
+		// Create the dispatcher servlet's Spring application context
+		AnnotationConfigWebApplicationContext dispatcherServlet = new AnnotationConfigWebApplicationContext();
+		dispatcherServlet.register(WebMvcSpringConfig.class);
 
-	@Override
-	protected void customizeRegistration(Dynamic registration) {
-		registration.setAsyncSupported(true);
+		// Register and map the dispatcher servlet
+		ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher", new DispatcherServlet(dispatcherServlet));
+		dispatcher.setAsyncSupported(true);
+		dispatcher.setLoadOnStartup(1);
+		dispatcher.addMapping("/");
 	}
 
 }
