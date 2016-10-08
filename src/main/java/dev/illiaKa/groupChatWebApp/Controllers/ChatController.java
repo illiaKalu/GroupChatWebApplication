@@ -1,12 +1,14 @@
 package dev.illiaKa.groupChatWebApp.Controllers;
 
 
+import dev.illiaKa.groupChatWebApp.ChatUtils.ChatRepository;
 import dev.illiaKa.groupChatWebApp.Model.UserMessage;
 import dev.illiaKa.groupChatWebApp.Services.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,6 +23,7 @@ import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Controller
+@RequestMapping("/chat")
 public class ChatController {
 
 	private final ChatRepository chatRepository;
@@ -31,7 +34,7 @@ public class ChatController {
 
 	private UserService userService;
 
-	@Autowired(required = true)
+	@Autowired
 	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
@@ -41,7 +44,7 @@ public class ChatController {
 		this.chatRepository = chatRepository;
 	}
 
-	@RequestMapping(value = "/chat", method = RequestMethod.GET)
+	@RequestMapping(value = "", method = RequestMethod.GET)
 	@ResponseBody
 	public DeferredResult<List<String>> getMessages(@RequestParam int messageIndex) {
 
@@ -58,7 +61,7 @@ public class ChatController {
 		return deferredResult;
 	}
 
-	@RequestMapping(value = "/chat", method = RequestMethod.POST)
+	@RequestMapping(value = "", method = RequestMethod.POST)
 	@ResponseBody
 	public void postMessage(@RequestParam String userName, @RequestParam String message) {
 
@@ -79,7 +82,7 @@ public class ChatController {
 		}
 	}
 
-	@RequestMapping(value = "/chat/loadStory", method = RequestMethod.GET)
+	@RequestMapping(value = "/loadStory", method = RequestMethod.GET)
 	@ResponseBody
 	public List<UserMessage> getMessagesStory() {
 
@@ -87,7 +90,6 @@ public class ChatController {
 
 		return resultList;
 	}
-
 
 
 }

@@ -1,5 +1,5 @@
 
-package dev.illiaKa.groupChatWebApp.Controllers;
+package dev.illiaKa.groupChatWebApp.ChatUtils;
 
 import java.util.List;
 
