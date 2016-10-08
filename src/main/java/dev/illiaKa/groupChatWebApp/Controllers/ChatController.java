@@ -82,7 +82,7 @@ public class ChatController {
 		}
 	}
 
-	@RequestMapping(value = "/loadStory", method = RequestMethod.GET)
+	@RequestMapping(value = "/chat/loadStory", method = RequestMethod.GET)
 	@ResponseBody
 	public List<UserMessage> getMessagesStory() {
 
