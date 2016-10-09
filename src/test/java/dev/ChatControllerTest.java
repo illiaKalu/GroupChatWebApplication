@@ -51,6 +51,6 @@ public class ChatControllerTest {
 
         when(userServiceMock.loadMessagesHistory()).thenReturn(testList);
 
-        mockMvc.perform(get("/loadStory"));
+        mockMvc.perform(get("chat/loadStory")).andExpect(status().isOk());
     }
 }

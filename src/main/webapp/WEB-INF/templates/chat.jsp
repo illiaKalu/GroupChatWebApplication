@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html >
 <head>
-	<script src="../../../resources/js/jquery-1.7.2.min.js"></script>
-	<script src="../../../resources/js/chat_js.js"> </script>
-	<script src="../../../resources/js/angular.min.js"></script>
+
+	<script src="../../resources/lib/angular/angular.min.js"></script>
+	<script src="../../resources/lib/jquery/jquery.min.js"></script>
+	<script src="../../resources/js/chat_js.js"> </script>
 
 	<link rel='shortcut icon' type='image/x-icon' href='../../resources/favicon.ico'/>
 	<title>Chat</title>
 </head>
 
-<body ng-app="app" ng-controller="chatController">
+<body ng-app="chat" ng-controller="chatController">
 
 <div>
 	<button ng-click="loginLogout()">{{loginButtonText}}</button>
@@ -31,7 +32,7 @@
 
 	<form id="postMessageForm" >
 		<p>
-			<input ng-model="message" id="message" name="message" type="text"  />
+			<input ng-model="message" id="message" name="message" type="text" />
 			<button ng-click="sendMessage()" id="post" type="submit" >Post</button>
 		</p>
 	</form>

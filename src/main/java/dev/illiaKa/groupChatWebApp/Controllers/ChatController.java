@@ -65,7 +65,7 @@ public class ChatController {
 	@ResponseBody
 	public void postMessage(@RequestParam String userName, @RequestParam String message) {
 
-		this.chatRepository.addMessage(message);
+		this.chatRepository.addMessage("[ " + userName + " ] " + message);
 
 		new Thread(() -> {
 			UserMessage um = new UserMessage();
@@ -82,7 +82,7 @@ public class ChatController {
 		}
 	}
 
-	@RequestMapping(value = "/chat/loadStory", method = RequestMethod.GET)
+	@RequestMapping(value = "/loadStory", method = RequestMethod.GET)
 	@ResponseBody
 	public List<UserMessage> getMessagesStory() {
 

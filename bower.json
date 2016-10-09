@@ -1,0 +1,25 @@
+{
+  "name": "group_chat_web_application",
+  "dependencies": {
+    "angular": "1.5.8",
+    "angular-mocks": "1.5.8",
+    "angular-resource": "1.5.8"
+  },
+  "authors": [
+    "illia kalu <illia.kalu@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "karma": "^0.4.6"
+  }
+}

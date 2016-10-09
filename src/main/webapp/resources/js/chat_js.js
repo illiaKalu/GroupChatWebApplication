@@ -1,12 +1,10 @@
-$(document).ready(function() {
-
-	var app = angular.module('app', []).controller('chatController', function($scope, $http) {
+	var app = angular.module('chat', []).controller('chatController', function($scope, $http, $httpParamSerializerJQLike) {
 
 		$scope.LoggedIn = false;
 		$scope.loginButtonText = 'Enter chat';
-
+		$scope.userName = '';
 		$scope.chatContent = '';
-
+		$scope.message = '';
 		$scope.messageStory = '';
 
 		var messageIndex = 0;
@@ -20,7 +18,7 @@ $(document).ready(function() {
 				keepPolling = true;
 				$scope.loginButtonText = 'Leave chat';
 				$scope.userName = $scope.name;
-				pullMessages();
+				$scope.pullMessages();
 			}else {
 				keepPolling = false;
 				$scope.loginButtonText = 'Enter chat';
@@ -51,7 +49,6 @@ $(document).ready(function() {
 						}
 					);
 
-
 		};
 
 
@@ -59,10 +56,10 @@ $(document).ready(function() {
 
 			if ($scope.message != '') {
 
-				var data = $.param({
+				var data = {
 					userName : $scope.name,
 					message : $scope.message
-				});
+				};
 
 				var config = {
 					headers : {
@@ -70,7 +67,7 @@ $(document).ready(function() {
 					}
 				};
 
-				$http.post("/chat", data, config)
+				$http.post("/chat", $httpParamSerializerJQLike(data), config)
 					.error(function (xhr) {
 						console.error("Error posting chat message: status=" + xhr.status + ", statusText=" + xhr.statusText);
 					});
@@ -81,13 +78,13 @@ $(document).ready(function() {
 
 		};
 
-		function pullMessages() {
+		$scope.pullMessages = function() {
 
 			$http.get("/chat/", { params : { 'messageIndex' : messageIndex } } )
 				.then(
 					function(response){
 						for ( var i = 0; i < response.data.length; i++) {
-							$scope.chatContent = $scope.chatContent + '[ ' + $scope.name + ' ] ' + response.data[i] + "\n";
+							$scope.chatContent = $scope.chatContent + response.data[i] + "\n";
 							messageIndex = messageIndex + 1;
 						}
 					},
@@ -97,12 +94,10 @@ $(document).ready(function() {
 							console.error("Unable to retrieve chat messages. Chat ended.");
 						}
 					}
-				).then( pullMessages );
+				).then( $scope.pullMessages );
 
-			$('#message').focus();
 
 		}
 
 	});
 
-});
