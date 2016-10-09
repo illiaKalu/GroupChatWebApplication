@@ -27,6 +27,7 @@ P.S. Alternative ways ( e.g. package and start from IDE, deploy .war artifact ) 
 
 <strong> Used technologies: </strong>
 <ul>
+<li>Java 8</li>
 <li>Spring MVC 4.0.3 RELEASE</li>
 <li>Hibernate 4.3.6 Final</li>
 <li>MySql 5.1</li>
@@ -42,4 +43,5 @@ P.S. Alternative ways ( e.g. package and start from IDE, deploy .war artifact ) 
 <li>JQuery 3.1.1</li>
 <li>Karma</li>
 <li>Jasmine</li>
+<li>Bootstrap</li>
 </ul>
