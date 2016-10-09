@@ -2,10 +2,10 @@
  * Created by sonicmaster on 09.10.16.
  */
 
-describe("chatController", function(){
-   var $rootScope,
-       $scope,
-       controller;
+describe("chatController", function () {
+    var $rootScope,
+        $scope,
+        controller;
 
 
     beforeEach(function () {
@@ -16,40 +16,57 @@ describe("chatController", function(){
             $scope = $rootScope.$new();
             controller = $injector.get('$controller')("chatController", {$scope: $scope});
 
-            var mockData = [{ 'message' : 'test_msg' }, {'message' : 'test_msg2' }];
+            var mockData = [{'message': 'test_msg'}, {'message': 'test_msg2'}];
 
             $httpBackend = _$httpBackend_;
-            $httpBackend.whenGET('/').respond(200, mockData);
-            $httpBackend.whenPOST('/').respond(200, mockData);
+            $httpBackend.whenGET('/chat/loadMessagesHistory').respond(200, mockData);
+            $httpBackend.whenPOST('/chat').respond(200, mockData);
         });
 
     });
 
-    // describe("send message", function(){
-    //
-    //    it("??", function () {
-    //
-    //      $scope.sendMessage();
-    //      $httpBackend.flush();
-    //
-    //      expect($scope.messageStory).not.toEqual('');
-    //      expect($scope.messageStory).not.toBeUndefined();
-    //    });
-    //
-    // });
+    describe("pull  messages returns something", function () {
 
-    // describe("pull messages", function(){
-    //
-    //    it("load story should return some messages", function () {
-    //
-    //      $scope.pullMessages();
-    //      $httpBackend.flush();
-    //
-    //      expect($scope.chatContent).not.toEqual('');
-    //      expect($scope.chatContent).not.toBeUndefined();
-    //    });
-    //
-    // });
+        it("send message should increase messageIndex ", function () {
+
+            $scope.pullMessages();
+            $httpBackend.flush();
+
+            expect($scope.messageIndex).toBeGreaterThan(0);
+
+        });
+
+    });
+
+
+    describe("send message test", function () {
+
+        it("send message should response 200 ", function () {
+
+            $scope.message = 'some test message to send';
+
+            $scope.sendMessage();
+            $httpBackend.flush();
+
+            expect($scope.userName).not.toBeUndefined();
+
+        });
+
+    });
+
+    describe("load messages history test", function () {
+
+        it("load history should return some messages", function () {
+
+            $scope.loadStory();
+            $httpBackend.flush();
+
+            expect($scope.getFormattedDate()).toHaveBeenCalled();
+            expect($scope.getFormattedTime()).toHaveBeenCalled();
+
+        });
+
+    });
 
 
     describe("authorization tests", function () {
@@ -66,7 +83,7 @@ describe("chatController", function(){
 
         });
 
-        it ("fields should be changed correctly after login", function () {
+        it("fields should be changed correctly after login", function () {
 
             expect($scope.loginButtonText).toBe('Enter chat');
             expect($scope.userName).toBe('');
@@ -81,14 +98,14 @@ describe("chatController", function(){
 
     });
 
-   describe("Initialization", function () {
+    describe("Initialization", function () {
         it("fields should be initialize properly", function () {
             expect($scope.userName).toBe('');
             expect($scope.LoggedIn).toBe(false);
-            expect($scope.chatContent).toBe('');
+            expect($scope.messageIndex).toBe(0);
             expect($scope.message).toBe('');
         });
 
-   });
+    });
 
 });

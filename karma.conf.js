@@ -15,10 +15,12 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      'src/main/webapp/resources/lib/jQuery/dist/jquery.min.js',
       'src/main/webapp/resources/lib/angular/angular.js',
       'src/main/webapp/resources/lib/angular-mocks/angular-mocks.js',
       'src/main/webapp/resources/lib/angular-resource/angular-resource.js',
       'src/main/webapp/resources/js/chat_js.js',
+
       'src/test/java/front/Controllers/*.js'
     ],
 

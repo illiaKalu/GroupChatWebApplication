@@ -1,18 +1,14 @@
 package dev;
 
-import dev.illiaKa.groupChatWebApp.ChatUtils.ChatRepository;
 import dev.illiaKa.groupChatWebApp.Controllers.ChatController;
 import dev.illiaKa.groupChatWebApp.Model.UserMessage;
 import dev.illiaKa.groupChatWebApp.Services.UserService;
-import dev.illiaKa.groupChatWebApp.Services.UserServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MockMvcBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.ArrayList;
@@ -43,7 +39,7 @@ public class ChatControllerTest {
     }
 
     @Test
-    public void test() throws Exception {
+    public void testLoadMessagesHistory() throws Exception {
 
         List<UserMessage> testList = new ArrayList();
 
@@ -51,6 +47,9 @@ public class ChatControllerTest {
 
         when(userServiceMock.loadMessagesHistory()).thenReturn(testList);
 
-        mockMvc.perform(get("chat/loadStory")).andExpect(status().isOk());
+        mockMvc.perform(get("chat/loadMessagesHistory"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("/loadMessagesHistory"));
     }
+
 }
